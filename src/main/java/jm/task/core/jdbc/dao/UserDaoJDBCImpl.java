@@ -11,13 +11,8 @@ public class UserDaoJDBCImpl implements UserDao {
     private static Connection conn = null;
 
     {
-        try {
-            conn = Util.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        conn = Util.getConnection();
     }
-
     public UserDaoJDBCImpl() {
 
     }
