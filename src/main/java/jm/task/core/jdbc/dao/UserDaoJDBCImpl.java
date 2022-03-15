@@ -100,8 +100,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
         return users;
     }
-
-    // Очистка содержания таблицы
+    
     public void cleanUsersTable() {
 
         try (Statement statement = conn.createStatement()) {
