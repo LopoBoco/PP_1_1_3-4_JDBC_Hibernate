@@ -30,21 +30,24 @@ public class Util {
 //        return connection;
 //    }
 
-    static SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
     public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
+        try {
             Configuration configuration = new Configuration();
             configuration.addAnnotatedClass(jm.task.core.jdbc.model.User.class);
             configuration.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
             configuration.setProperty(Environment.URL, url);
             configuration.setProperty(Environment.USER, userName);
             configuration.setProperty(Environment.PASS, password);
+            configuration.setProperty(Environment.HBM2DDL_AUTO, "create-drop");
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties())
                     .build();
 
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return sessionFactory;
     }
